@@ -1,0 +1,3 @@
+﻿  dualHeap.cpp
+f:\workspace\bookdatastructure\dualheap.cpp(31): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  BookDataStructure.vcxproj -> F:\workspace\BookDataStructure\Debug\BookDataStructure.exe

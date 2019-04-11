@@ -1,0 +1,3 @@
+﻿  sort_bigestNumber.cpp
+f:\workspace\programmers\sort_bigestnumber.cpp(43): warning C4477: 'printf' : 서식 문자열 '%s'에 'char *' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'std::string'입니다.
+  Programmers.vcxproj -> F:\workspace\Programmers\Debug\Programmers.exe

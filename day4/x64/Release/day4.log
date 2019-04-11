@@ -1,0 +1,2 @@
+﻿  main.c
+f:\workspace\day4\main.c(52): error C2198: 'color': 호출에 매개 변수가 너무 적습니다.

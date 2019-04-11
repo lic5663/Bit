@@ -1,0 +1,4 @@
+﻿  pro4.c
+f:\workspace\day6\pro4.c(217): warning C4013: 'gets'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+  LINK : F:\workspace\day6\Debug\day6.exe을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
+  day6.vcxproj -> F:\workspace\day6\Debug\day6.exe
