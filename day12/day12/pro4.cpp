@@ -29,19 +29,19 @@ public:
 	}
 	~String()
 	{
-		delete str;
+		if (str !=  NULL)
+			delete[] str;
 	}
 
 	// temp 증발함
-	String& operator= (const String& s)
+	String& operator=(const String& s)
 	{
-		this->len = s.len;
-
 		if (s.str != NULL)
 			delete[] str;
 
-		this->str = new char[this->len +1 ];
-		strcpy(this->str, s.str);
+		len = s.len;
+		str = new char[len +1 ];
+		strcpy(str, s.str);
 
 		return *this;
 	}
@@ -50,13 +50,13 @@ public:
 	String& operator+= (const String& s)
 	{
 		len += s.len;
-		char temp[100];
-		strcpy(temp, str);
+		char* tempstr = new char[len+1];
+		strcpy(tempstr, str);
+		strcat(tempstr, s.str);
 
-		delete(str);
-		str = new char[len + 1];
-		strcpy(str, temp);
-		str = strcat(str, s.str);
+		if (str != NULL)
+			delete[] str;
+		str = tempstr;
 		return *this;
 	}
 
@@ -73,11 +73,14 @@ public:
 	// temp때 소멸자 소환되서 맛간다 수정
 	String operator+ (const String& s)
 	{	
-		char buffer[100];
+		char* buffer = new char[len + s.len +1];
 		strcpy(buffer, str);
 		strcat(buffer, s.str);
 
-		return String(buffer);
+		String temp(buffer);
+		delete[]buffer;
+
+		return temp;
 
 	}
 
@@ -98,13 +101,13 @@ istream& operator>> (istream& is, String& s)
 	char buff[100];
 	is >> buff;
 
-	s.len = strlen(buff);
-	s.str = new char[s.len + 1];
-	strcpy(s.str, buff);
+	//s.len = strlen(buff);
+	//s.str = new char[s.len + 1];
+	//strcpy(s.str, buff);
 	
+	s = String(buff);
 	return is;
 }
-
 
 int main(void)
 {
