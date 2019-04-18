@@ -1,0 +1,7 @@
+F:\workspace\day14\day14\bin\Debug\day14.exe.config
+F:\workspace\day14\day14\bin\Debug\day14.exe
+F:\workspace\day14\day14\bin\Debug\day14.pdb
+F:\workspace\day14\day14\obj\Debug\day14.csprojAssemblyReference.cache
+F:\workspace\day14\day14\obj\Debug\day14.csproj.CoreCompileInputs.cache
+F:\workspace\day14\day14\obj\Debug\day14.exe
+F:\workspace\day14\day14\obj\Debug\day14.pdb
