@@ -36,16 +36,16 @@ namespace CshopSolo
             b = temp;
         }
 
-        public static void Divide (int a, int b, out int quotient, out int remainder)
+        public static void Divide(int a, int b, out int quotient, out int remainder)
         {
             quotient = a / b;
             remainder = a % b;
         }
 
-        public int Sum (params int[] args)
+        public int Sum(params int[] args)
         {
             int sum = 0;
-            for(int i = 0; i< args.Length; i++)
+            for (int i = 0; i < args.Length; i++)
             {
                 sum += args[i];
             }
@@ -75,6 +75,233 @@ namespace CshopSolo
         }
     }
 
+    class Cat
+    {
+
+        public string Name;
+        public string Color;
+
+        public Cat(string name = "나비", string color = "신비로운색")
+        {
+            Name = name;
+            Color = color;
+        }
+        ~Cat()
+        {
+            WriteLine($"{Name} : 바이바이");
+        }
+
+        public void Meow()
+        {
+            WriteLine($"{Name} : 야옹");
+        }
+
+    }
+
+    class TmpClass
+    {
+        public int MyField1;
+        public int MyField2;
+
+        public TmpClass DeepCopy()
+        {
+            TmpClass newCopy = new TmpClass();
+            newCopy.MyField1 = this.MyField1;
+            newCopy.MyField2 = this.MyField2;
+
+            return newCopy;
+        }
+    }
+
+    class ThisClass
+    {
+        int a, b, c;
+
+        public ThisClass()
+        {
+            this.a = 5425;
+        }
+
+        public ThisClass(int b) : this()
+        {
+            this.b = b;
+        }
+
+        public ThisClass(int b, int c) : this(b)
+        {
+            this.c = c;
+        }
+
+        public void PrintField()
+        {
+            WriteLine($"a:{a}, b:{b}, c:{c}");
+        }
+    }
+
+    class Mammal
+    {
+        public void Nurse()
+        {
+            WriteLine("Nurse()");
+        }
+    }
+
+    class Dog : Mammal
+    {
+        public void Bark()
+        {
+            WriteLine("Bark()");
+        }
+    }
+
+    class CCat : Mammal
+    {
+        public void Meow()
+        {
+            WriteLine("Meow()");
+        }
+    }
+
+    class ArmorSuite
+    {
+        public virtual void Initialize()
+        {
+            WriteLine("Armored");
+        }
+    }
+
+    class IronMan : ArmorSuite
+    {
+        public override void Initialize()
+        {
+            base.Initialize();
+            WriteLine("Repulsor Rays Armed");
+        }
+    }
+
+    class WarMachine : ArmorSuite
+    {
+        public override void Initialize()
+        {
+            base.Initialize();
+            WriteLine("Double-Barrel Cannons Armed");
+            WriteLine("Micro-Rocket Launcher Armed");
+        }
+    }
+
+    class Base
+    {
+        public void MyMethod()
+        {
+            WriteLine("Base.MyMethod");
+        }
+    }
+
+    class Derived : Base
+    {
+        public new void MyMethod()
+        {
+            WriteLine("Derived.MyMethod");
+        }
+    }
+
+    class OuterClass
+    {
+        private int OuterMember;
+
+        public class NestedClass
+        {
+            public void DoSomething()
+            {
+                OuterClass outer = new OuterClass();
+                outer.OuterMember = 10;
+            }
+        }
+    }
+
+    class Configuration
+    {
+        List<ItemValue> listConfig = new List<ItemValue>();
+
+        public void SetConfig(string item, string value)
+        {
+            ItemValue iv = new ItemValue();
+            iv.SetValue(this, item, value);
+        }
+
+        public string GetConfig(string item)
+        {
+            foreach (ItemValue iv in listConfig)
+            {
+                if (iv.GetItem() == item)
+                    return iv.GetValue();
+            }
+            return "";
+        }
+        
+
+        public class ItemValue
+        {
+            private string item;
+            private string value;
+
+            public void SetValue(Configuration config, string item, string value)
+            {
+                this.item = item;
+                this.value = value;
+
+                bool found = false;
+                for (int i = 0; i < config.listConfig.Count; i++)
+                {
+                    if (config.listConfig[i].item == item)
+                    {
+                        config.listConfig[i] = this;
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (found == false)
+                    config.listConfig.Add(this);
+
+            }
+            public string GetItem()
+            {
+                return item;
+            }
+            public string GetValue()
+            {
+                return value;
+            }
+        }
+    }
+
+    public static class IntegerExtension
+    {
+        public static int Square (this int myInt)
+        {
+            return myInt * myInt;
+        }
+
+        public static int Power (this int myInt, int exponent)
+        {
+            int result = myInt;
+            for (int i = 1; i < exponent; i++)
+                result *= myInt;
+            return result;
+        }
+    }
+
+    public static class StringExtension
+    {
+        public static string Append(this string mystr, string addstr)
+        {
+            string apStr = mystr;
+            apStr += addstr;
+            return apStr;
+        }
+    }
+
     class Program
     {
         static void ch5()
@@ -82,17 +309,17 @@ namespace CshopSolo
             int[] arr = new int[] { 0, 1, 2, 3, 4 };
             int[] brr = { 1, 2, 3, 4, 5, 6 };
 
-            foreach(int a in arr)
+            foreach (int a in arr)
             {
                 WriteLine(a);
             }
 
-            foreach(int a in brr)
+            foreach (int a in brr)
             {
                 WriteLine(a);
             }
 
-            for (int i= 0; i<5;i++)
+            for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j <= i; j++)
                     Write('*');
@@ -101,9 +328,9 @@ namespace CshopSolo
 
             WriteLine();
 
-            for (int i=0; i<5; i++)
+            for (int i = 0; i < 5; i++)
             {
-                for (int j = 5; j >i; j--)
+                for (int j = 5; j > i; j--)
                     Write('*');
                 WriteLine();
             }
@@ -117,7 +344,7 @@ namespace CshopSolo
                     Write('*');
                     m++;
                 }
-                    
+
                 WriteLine();
                 m = 0;
                 n++;
@@ -162,13 +389,120 @@ namespace CshopSolo
             int sum = cal.Sum(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
             WriteLine($"{sum}");
             cal.PrintProfile(phone: "모름", name: "이인찬");
-            
+
+
+
         }
+
+        static void ch7()
+        {
+            Cat kitty = new Cat();
+            kitty.Color = "하얀색";
+            kitty.Name = "키티";
+            kitty.Meow();
+            WriteLine($"{kitty.Name} : {kitty.Color}");
+
+            Cat nero = new Cat();
+            nero.Color = "검은색";
+            nero.Name = "네로";
+            nero.Meow();
+            WriteLine($"{nero.Name} : {nero.Color}");
+
+            Cat nabi = new Cat();
+            nabi.Meow();
+            WriteLine($"{nabi.Name} : {nabi.Color}");
+
+            TmpClass source = new TmpClass();
+            source.MyField1 = 10;
+            source.MyField2 = 20;
+
+            TmpClass copy = source.DeepCopy();
+            copy.MyField2 = 30;
+
+            WriteLine($"{source.MyField1} , {source.MyField2}");
+            WriteLine($"{copy.MyField1} , {copy.MyField2}");
+
+            ThisClass a = new ThisClass();
+            ThisClass b = new ThisClass(1);
+            ThisClass c = new ThisClass(10, 20);
+
+            a.PrintField();
+            b.PrintField();
+            c.PrintField();
+
+            Mammal mammal = new Dog();
+            Dog dog;
+
+            if (mammal is Dog)
+            {
+                dog = (Dog)mammal;
+                dog.Bark();
+            }
+
+            Mammal mammal2 = new CCat();
+            CCat cat = mammal2 as CCat;
+            if (cat != null)
+            {
+                cat.Meow();
+            }
+
+            CCat cat2 = mammal as CCat;
+            if (cat2 != null)
+            {
+                cat2.Meow();
+            }
+            else
+                WriteLine("cat2 is not a cat");
+
+            WriteLine("\nCreating ArmorSuite...");
+            ArmorSuite armorSuite = new ArmorSuite();
+            armorSuite.Initialize();
+
+            WriteLine("\nCreating IronMan...");
+            IronMan ironMan = new IronMan();
+            ironMan.Initialize();
+
+            WriteLine("\nCreating WarMachine");
+            ArmorSuite warmachine = new WarMachine();
+            warmachine.Initialize();
+
+            Base baseObj = new Base();
+            baseObj.MyMethod();
+
+            Derived derivedObj = new Derived();
+            derivedObj.MyMethod();
+
+            Base derivedObj2 = new Derived();
+            derivedObj2.MyMethod();
+
+
+            Configuration config = new Configuration();
+            config.SetConfig("Version", "V 5.0");
+            config.SetConfig("Size", "655,324 KB");
+
+            WriteLine(config.GetConfig("Version"));
+            WriteLine(config.GetConfig("Size"));
+
+            config.SetConfig("Version", "V 5.0.1");
+            WriteLine(config.GetConfig("Version"));
+
+            Configuration.ItemValue item = new Configuration.ItemValue();
+
+            WriteLine($"3^2 : {3.Square()}");
+            WriteLine($"3^4 : {3.Power(4)}");
+            WriteLine($"2^10 : {2.Power(10)}");
+
+            string hello = "Hello";
+            WriteLine(hello.Append(", World!"));
+        }
+
+
 
         static void Main(string[] args)
         {
             //ch5();
-            ch6();
+            //ch6();
+            ch7();
         }
     }
 }
