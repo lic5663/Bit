@@ -4,6 +4,7 @@ using static System.Console;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace test
 {
@@ -302,6 +303,124 @@ namespace CshopSolo
         }
     }
 
+    interface ILogger
+    {
+        void WriteLog(string log);
+    }
+    
+    class ConsoleLogger : ILogger
+    {
+        public void WriteLog(string message)
+        {
+            WriteLine($"{DateTime.Now.ToLocalTime()} {message}");
+        }
+    }
+
+    class ClimateMonitor
+    {
+        private ILogger logger;
+        public ClimateMonitor(ILogger logger)
+        {
+            this.logger = logger;
+        }
+
+        public void start()
+        {
+            while (true)
+            {
+                Console.Write("온도를 입력하시오 : ");
+                string temperature = ReadLine();
+                if (temperature == "")
+                    break;
+                logger.WriteLog("현재 온도 : " + temperature);
+            }
+        }
+    }
+
+    class FileLogger : ILogger
+    {
+        private StreamWriter writer;
+
+        public FileLogger(string path)
+        {
+            writer = File.CreateText(path);
+            writer.AutoFlush = true;
+        }
+
+        public void WriteLog(string message)
+        {
+            writer.WriteLine($"{DateTime.Now.ToShortDateString()} {message}");
+        }
+    }
+
+    interface IFormattableLogger : ILogger
+    {
+        void WriteLog(string format, params Object[] args);
+    }
+
+    class ConsoleLogger2 : IFormattableLogger
+    {
+        public void WriteLog(string message)
+        {
+            WriteLine($"{DateTime.Now.ToLocalTime()} {message}");
+        }
+
+        public void WriteLog(string format, params Object[] args)
+        {
+            String message = String.Format(format, args);
+            Console.WriteLine($"{DateTime.Now.ToLocalTime()} {message}");
+        }
+    }
+
+    interface IRunnable
+    {
+        void Run();
+    }
+
+    interface IFlyable
+    {
+        void Run();
+        void Fly();
+    }
+
+    class FlyingCar : IRunnable,IFlyable
+    {
+        public void Run()
+        {
+            WriteLine("RRRRRRun!");
+        }
+
+        public void Fly()
+        {
+            WriteLine("FFFFFFFFFly");
+        }
+    }
+
+    abstract class AbstractBase
+    {
+        protected void PrivateMethodA()
+        {
+            WriteLine("AbstractBase.PrivateMethodA()");
+        }
+
+        public void PublicMethodA()
+        {
+            WriteLine("AbstractBase.PublicMethodA()");
+        }
+
+        public abstract void AbstractMethodA();
+    }
+
+    class Derived2 : AbstractBase
+    {
+        public override void AbstractMethodA()
+        {
+            WriteLine("Derived.AbstractMethodA()");
+            PrivateMethodA();
+        }
+    }
+
+
     class Program
     {
         static void ch5()
@@ -496,13 +615,45 @@ namespace CshopSolo
             WriteLine(hello.Append(", World!"));
         }
 
+        // 인터페이스와 추상 클래스
+        static void ch8()
+        {
+            ConsoleLogger consoleLogger = new ConsoleLogger();
+            consoleLogger.WriteLog("하이");
 
+            //ClimateMonitor monitor = new ClimateMonitor(new ConsoleLogger());
+            //monitor.start();
+
+            //ClimateMonitor monitor2 = new ClimateMonitor(new FileLogger("MyLog.txt"));
+            //monitor2.start();
+
+            IFormattableLogger logger = new ConsoleLogger2();
+            logger.WriteLog("The World is not flat.");
+            logger.WriteLog($"{1} + {1} = {2}");
+
+            FlyingCar car = new FlyingCar();
+            car.Run();
+            car.Fly();
+
+            IRunnable runnable = car as IRunnable;
+            runnable.Run();
+
+            IFlyable flyable = car as IFlyable;
+            flyable.Fly();
+
+
+            AbstractBase obj = new Derived2();
+            obj.AbstractMethodA();
+            obj.PublicMethodA();
+        }
 
         static void Main(string[] args)
         {
             //ch5();
             //ch6();
-            ch7();
+            //ch7();
+            ch8();
+
         }
     }
 }
