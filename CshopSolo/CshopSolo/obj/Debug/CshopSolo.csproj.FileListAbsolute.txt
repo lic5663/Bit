@@ -1,0 +1,7 @@
+F:\workspace\CshopSolo\CshopSolo\bin\Debug\CshopSolo.exe.config
+F:\workspace\CshopSolo\CshopSolo\bin\Debug\CshopSolo.exe
+F:\workspace\CshopSolo\CshopSolo\bin\Debug\CshopSolo.pdb
+F:\workspace\CshopSolo\CshopSolo\obj\Debug\CshopSolo.csprojAssemblyReference.cache
+F:\workspace\CshopSolo\CshopSolo\obj\Debug\CshopSolo.csproj.CoreCompileInputs.cache
+F:\workspace\CshopSolo\CshopSolo\obj\Debug\CshopSolo.exe
+F:\workspace\CshopSolo\CshopSolo\obj\Debug\CshopSolo.pdb

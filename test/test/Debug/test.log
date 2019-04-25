@@ -1,0 +1,4 @@
+﻿  test.cpp
+F:\workspace\test\test\test.cpp(6): warning C4326: 'main'의 반환 형식이 'int'이어야 하는데 'void'입니다.
+F:\workspace\test\test\test.cpp(10): warning C4805: '==': 연산에 'BOOL' 형식과 'bool' 형식을 함께 사용하는 것은 안전하지 않습니다.
+  test.vcxproj -> F:\workspace\test\Debug\test.exe
